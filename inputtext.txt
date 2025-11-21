@@ -1,0 +1,22 @@
+cd "c:\Users\shris\Documents\College\Study\Fourth Year\Sem 7\DeepLearning\Final-Project\backend" && python -m uvicorn app:app --reload
+
+cd "c:\Users\shris\Documents\College\Study\Fourth Year\Sem 7\DeepLearning\Final-Project\frontend" && npm run dev
+
+testing inpusts:- 
+
+Genetic Data: BRCA1 c.5123C>A p.A1708E
+Clinical Data: Patient shows a mutation in the BRCA1 gene at position 5123, changing cysteine to alanine. This mutation is located in a critical domain of the protein and has been previously reported in breast cancer cases.
+
+Genetic Data: PIK3CA H1047R
+Clinical Data: Somatic mutation in PIK3CA gene resulting in amino acid change from histidine to arginine at position 1047. This is a well-known hotspot mutation that occurs in the kinase domain and is commonly found in breast cancers. Multiple studies have shown this mutation leads to increased catalytic activity.
+
+Genetic Data: TP53 R273C
+Clinical Data: Missense mutation in the TP53 tumor suppressor gene changing arginine to cysteine at codon 273. This mutation occurs in the DNA-binding domain and affects protein function. Clinical significance is being evaluated in ongoing studies.
+
+Genetic Data: EGFR T790M + L858R
+Clinical Data: Double mutation in EGFR gene. T790M is associated with resistance to first-generation TKIs. L858R is a common activating mutation. Combined presence suggests potential response to third-generation EGFR inhibitors.
+
+Genetic Data: KRAS G12D
+Clinical Data: Common KRAS mutation at codon 12, changing glycine to aspartic acid. This is a well-characterized mutation that typically indicates poor response to EGFR inhibitors in colorectal cancer.
+
+https://www.loom.com/share/ba96348a95194bbf8701b00f1165bfee
