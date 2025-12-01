@@ -49,18 +49,36 @@ class MutationPredictor:
 
     def _load_artifacts(self):
         """Load all required model artifacts."""
-        # Load text processor
-        text_processor = joblib.load(os.path.join(self.model_dir, 'text_processor.pkl'))
-        self.word2idx = text_processor['word2idx']
-        self.vocab = text_processor['vocab']
+        # Define paths to model artifacts in saved_models directory
+        saved_models_dir = os.path.join(self.model_dir, 'model', 'saved_models')
+        model_path = os.path.join(self.model_dir, 'model', 'model.pth')
+        
+        # Check if text_processor exists, otherwise use model_config
+        text_processor_path = os.path.join(saved_models_dir, 'text_processor.joblib')
+        if os.path.exists(text_processor_path):
+            text_processor = joblib.load(text_processor_path)
+            self.word2idx = text_processor['word2idx']
+            self.vocab = text_processor['vocab']
+        else:
+            # Fallback: Load vocab size from model_config.json
+            import json
+            config_path = os.path.join(saved_models_dir, 'model_config.json')
+            with open(config_path, 'r') as f:
+                config = json.load(f)
+            vocab_size = config['vocab_size']
+            # Create minimal vocab - this needs to be regenerated properly
+            print(f"WARNING: text_processor.joblib not found. Using vocab_size={vocab_size} from config.")
+            print("Note: Predictions may not work correctly without the actual vocabulary mapping.")
+            self.vocab = list(range(vocab_size))
+            self.word2idx = {str(i): i for i in range(vocab_size)}
         
         # Load label encoders
-        self.le_gene = joblib.load(os.path.join(self.model_dir, 'le_gene.pkl'))
-        self.le_var = joblib.load(os.path.join(self.model_dir, 'le_variation.pkl'))
+        self.le_gene = joblib.load(os.path.join(saved_models_dir, 'le_gene.joblib'))
+        self.le_var = joblib.load(os.path.join(saved_models_dir, 'le_variation.joblib'))
         
         # Initialize and load model
         self.model = PersonalizedMedicineNet(len(self.vocab))
-        self.model.load_state_dict(torch.load(os.path.join(self.model_dir, 'model.pth')))
+        self.model.load_state_dict(torch.load(model_path, map_location=self.device))
         self.model.to(self.device)
         self.model.eval()
 

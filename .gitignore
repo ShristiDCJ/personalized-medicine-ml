@@ -46,9 +46,6 @@ yarn-error.log*
 .idea/
 
 # Model files and large data
-*.pth
-*.pkl
-*.joblib
 *.h5
 *.onnx
 test_text
