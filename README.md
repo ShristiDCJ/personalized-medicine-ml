@@ -2,6 +2,15 @@
 
 This guide explains how to deploy the Personalized Medicine Classification system, which consists of a FastAPI backend and a Next.js frontend.
 
+Missing Files:-
+The dataset used here is available on the given link:- https://www.kaggle.com/c/msk-redefining-cancer-treatment
+
+The files form the dataset currently used are:-
+1. training_variants.csv
+2. training_text.csv
+
+The file may not be in the repo because its too large so download the files so that the project runs smoothly.
+
 ## Backend Deployment (Render)
 
 1. Create a new Web Service on Render
